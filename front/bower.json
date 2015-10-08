@@ -1,0 +1,30 @@
+{
+  "name": "HackNet",
+  "version": "0.0.0",
+  "authors": [
+    "Leopold Jacquot <leopold.jacquot@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "font-awesome": "~4.4.0",
+    "angular-bootstrap": "~0.13.4",
+    "modernizr": "*"
+  },
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "mocha": "~2.2.5"
+  }
+}

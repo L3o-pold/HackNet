@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>
+    Hacknet
+  </title>
+    <meta name="robots" content="index, follow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- build:css(.tmp) styles/style.css -->
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/vtortola.ng-terminal.css -->
+    <link rel="stylesheet" href="styles/vtortola.ng-terminal.css">
+    <!-- endbuild -->
+
+    <link rel="stylesheet" type="text/css"
+            href="../bower_components/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+    <!--[if lt IE 10]>
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1"
+                aria-expanded="false">
+          <span class="sr-only">Menu</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#"><i class="fa fa-cogs"></i></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <p class="navbar-text">Location <a href="#" class="navbar-link">Mr. Robot PC</a></p>
+            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+          </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">RAM</div>
+          <div class="panel-body">
+          </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">Display</div>
+          <div class="panel-body">
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">netMap 1.7</div>
+          <div class="panel-body">
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-heading">Terminal</div>
+          <div class="panel-body">
+            <div ng-controller="console">
+                <terminal>
+                    <p class="click-me">Click me to start commanding !</p>
+                </terminal>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vtortola.ng-terminal.js -->
+    <script type="text/javascript" src="scripts/vtortola.ng-terminal.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/example.command.tools.js -->
+      <script type="text/javascript" src="scripts/example.command.tools.js"></script>
+    <!-- endbuild -->
+    <!-- build:js scripts/example.command.implementations.js -->
+    <script type="text/javascript" src="scripts/example.command.implementations.js"></script>
+     <!-- endbuild -->
+    <!-- build:js scripts/example.command.filesystem.js -->
+    <script type="text/javascript" src="scripts/example.command.filesystem.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/app.js -->
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
