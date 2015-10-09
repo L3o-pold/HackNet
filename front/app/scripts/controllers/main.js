@@ -9,4 +9,9 @@ angular.module('hackNet')
         $scope.$on('oauth:logout', function(event) {
             $scope.accessToken = null;
         });
+
+        $scope.$on('oauth:authorized', function(event, token) {
+            $scope.accessToken = token.access_token;
+            $scope.show = 'logged-in';
+        });
     });
