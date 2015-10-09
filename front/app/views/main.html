@@ -14,14 +14,11 @@
                       template="views/oauth2.html"
                       site="https://accounts.google.com/o/oauth2"
                       client-id="71428555143-gajev4bbm9nl5oloe6blhijq2vp4qvac.apps.googleusercontent.com"
-                      redirect-uri="http://www.hacknet.com/front/dist/index.html"
+                      redirect-uri="http://www.hacknet.com/index.html"
                       scope="https://www.googleapis.com/auth/userinfo.profile"
                       response-type="token"
                       authorize-path="/auth">
             </oauth>
-          <div class="token" ng-if="accessToken">
-              with access token {{accessToken}}
-            </div>
           </div>
         </div>
         <div class="panel panel-default">
@@ -34,10 +31,8 @@
         <div class="panel panel-default">
           <div class="panel-heading">Terminal</div>
           <div class="panel-body">
-            <div ng-controller="console">
-                <terminal>
-                    <p class="click-me">Click me to start commanding !</p>
-                </terminal>
+            <div ng-controller="console" ng-if="accessToken">
+                <terminal></terminal>
             </div>
           </div>
         </div>
