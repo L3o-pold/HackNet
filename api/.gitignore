@@ -1,3 +1,5 @@
 /cache/
 /config/development/
+/vendor/
 .phalcon
+composer.lock

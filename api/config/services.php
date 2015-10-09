@@ -41,3 +41,11 @@ $di->setShared('db', function () use ($config) {
 
     return new $class($dbConfig);
 });
+
+$di['oauth'] = function () {
+    $oauth = new \Sumeko\Phalcon\Oauth2\Server\StandaloneWrapper();
+    $oauth->initAuthorizationServer();
+    $oauth->initResourceServer();
+    $oauth->enableAllGrants();
+    return $oauth;
+};

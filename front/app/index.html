@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="hackNet">
 <head>
   <meta charset="UTF-8">
   <title>
     Hacknet
   </title>
+    <base href="/">
     <meta name="robots" content="index, follow"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,86 +14,37 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- build:css(.tmp) styles/style.css -->
-    <link rel="stylesheet" href="styles/style.css">
+    <link href="styles/style.scss">
     <!-- endbuild -->
 
     <!-- build:css(.tmp) styles/vtortola.ng-terminal.css -->
-    <link rel="stylesheet" href="styles/vtortola.ng-terminal.css">
+    <link href="styles/vtortola.ng-terminal.scss">
     <!-- endbuild -->
+
+    <!-- bower:css -->
+    <!-- endbower -->
 
     <link rel="stylesheet" type="text/css"
             href="../bower_components/font-awesome/css/font-awesome.min.css">
 </head>
-<body>
+<body ng-controller="MainCtrl">
     <!--[if lt IE 10]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-                aria-expanded="false">
-          <span class="sr-only">Menu</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#"><i class="fa fa-cogs"></i></a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <p class="navbar-text">Location <a href="#" class="navbar-link">Mr. Robot PC</a></p>
-            <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-          </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-  <div class="row">
-    <div class="col-md-3">
-        <div class="panel panel-default">
-          <div class="panel-heading">RAM</div>
-          <div class="panel-body">
-          </div>
-        </div>
-    </div>
-    <div class="col-md-5">
-        <div class="panel panel-default">
-          <div class="panel-heading">Display</div>
-          <div class="panel-body">
-          </div>
-        </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">netMap 1.7</div>
-          <div class="panel-body">
-          </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default">
-          <div class="panel-heading">Terminal</div>
-          <div class="panel-body">
-            <div ng-controller="console">
-                <terminal>
-                    <p class="click-me">Click me to start commanding !</p>
-                </terminal>
-            </div>
-          </div>
-        </div>
-    </div>
-  </div>
+    <div ng-include="'views/header.html'"></div>
+
+    <!-- Add your site or application content here -->
+    <div ng-view=""></div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/ngstorage/ngStorage.js"></script>
+    <script src="/bower_components/oauth-ng/dist/oauth-ng.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -109,8 +61,16 @@
     <script type="text/javascript" src="scripts/example.command.filesystem.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js scripts/app.js -->
-    <script type="text/javascript" src="scripts/app.js"></script>
+    <!-- build:js scripts/app.module.js -->
+    <script type="text/javascript" src="scripts/app.module.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/app.config.js -->
+    <script type="text/javascript" src="scripts/app.config.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js scripts/controllers/main.js -->
+    <script type="text/javascript" src="scripts/controllers/main.js"></script>
     <!-- endbuild -->
 </body>
 </html>

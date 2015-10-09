@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Phalcon PHP Framework</title>
+    </head>
+    <body>
+        <div class="container">
+            <form action="signin/?client_id=testclient&redirect_uri=http://hacknet.local/front/dist&response_type=code" method="post">
+                <input type="text" name="grant_type" value="client_credentials">
+                <input type="submit" value="Approve" name="authorization">
+                <input type="submit" value="Deny" name="authorization">
+            </form>
+        </div>
+    </body>
+</html>

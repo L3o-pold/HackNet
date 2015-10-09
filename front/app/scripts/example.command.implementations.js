@@ -105,9 +105,7 @@
         var ga = null;
         me.command= 'su';
         me.description = ['Changes the  user identity.', "Syntax: su <userName>", "Example: su vtortola"];
-        me.init = ['$ga', function ($ga) {
-            ga = $ga;
-        }];
+
         me.handle= function (session, login) {
             if (!login) {
                 session.output.push({ output: true, text: ["The <userName> parameter is required.", "Type 'help su' to get a hint."], breakLine: true });
@@ -128,9 +126,6 @@
         var _ga = null;
         me.command = 'feedback';
         me.description = ['Sends a feedback message to the author.', "Example: feedback This application is awesome! Where may I donate?"];
-        me.init = ['$ga', function ($ga) {
-            _ga = $ga;
-        }];
         me.handle = function (session, param) {
             param = Array.prototype.slice.call(arguments, 1);
             param = param.join(' ');
