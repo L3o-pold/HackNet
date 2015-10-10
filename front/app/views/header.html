@@ -19,12 +19,9 @@
           <li class="active"><a href="#"><i class="fa fa-cogs"></i></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <p class="navbar-text">Location Mr.
-                <a href="#" class="navbar-link">Mr. Robot PC</a>
+            <p class="navbar-text" ng-show="user.authenticated">
+                <a href="#" class="navbar-link">{{user.email}} PC</a>
                 <a href="#" ua-logout>Log Out</a>
-                <span class="token" ng-if="show=='logged-in'">
-                    with access token {{accessToken}}
-                </span>
             </p>
             <li><a href="#"><i class="fa fa-envelope"></i></a></li>
           </ul>
