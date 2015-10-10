@@ -14,3 +14,5 @@ $loader->registerDirs(
         'HackNet\Controllers' => $config->application->controllersDir,
     )
 )->register();
+
+include __DIR__ . '/../vendor/autoload.php';

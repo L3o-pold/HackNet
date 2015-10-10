@@ -18,16 +18,6 @@ $di = new FactoryDefault();
 $di->setShared('view', function () use ($config) {
     $view = new View();
     $view->setViewsDir($config->application->viewsDir);
-    $view->registerEngines(array(
-        '.phtml' => function ($view, $di) use ($config) {
-            $volt = new VoltEngine($view, $di);
-            $volt->setOptions(array(
-                'compiledPath' => $config->application->cacheDir . 'volt/',
-                'compiledSeparator' => '_'
-            ));
-            return $volt;
-        }
-    ));
     return $view;
 });
 

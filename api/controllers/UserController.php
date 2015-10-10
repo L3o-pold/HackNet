@@ -14,21 +14,15 @@ use Phalcon\UserPlugin\Forms\User\RegisterForm;
 use Phalcon\UserPlugin\Forms\User\ForgotPasswordForm;
 use Phalcon\UserPlugin\Forms\User\ChangePasswordForm;
 
-use Phalcon\UserPlugin\Auth\Exception as AuthException;
-use Phalcon\UserPlugin\Connectors\FacebookConnector;
+use Phalcon\Http\Response;
 
 use Phalcon\Mvc\View;
 use Phalcon\Tag;
 
+use \UserApp\Widget\User as UserApp;
+
 class UserController extends Controller
 {
-
-    public function indexAction()
-    {
-        $this->persistent->conditions = null;
-        $this->view->form = new LoginForm();
-        $this->view->render('users/index');
-    }
 
     /**
      * Login user
@@ -36,72 +30,27 @@ class UserController extends Controller
      */
     public function loginAction()
     {
-        if(true === $this->auth->isUserSignedIn())
-        {
-            $this->response->redirect(array('action' => 'profile'));
-        }
-
         $form = new LoginForm();
+        $response = new Response();
 
-        try {
-            $this->auth->login($form);
-        } catch (AuthException $e) {
-            $this->flash->error($e->getMessage());
+        $this->response->setStatusCode(409, "Invalid username or password");
+
+        if ($this->request->isPost()) {
+            if (!$form->isValid($this->request->getPost())) {
+                foreach($form->getMessages() as $message) {
+                    $response->setStatusCode(409, $message->getMessage());
+                }
+            } else {
+                $username = $this->request->getPost('username', 'striptags');
+                $password = $this->security->hash($this->request->getPost('password'));
+
+                if(UserApp::login($username, $password)){
+                    $response->setStatusCode(201, "Login");
+                }
+            }
         }
 
-        $this->view->form = $form;
-    }
-
-    /**
-     * Login with Facebook account
-     */
-    public function loginWithFacebookAction()
-    {
-        try {
-            $this->view->disable();
-            return $this->auth->loginWithFacebook();
-        } catch(AuthException $e) {
-            $this->flash->error('There was an error connectiong to Facebook.');
-        }
-    }
-
-    /**
-     * Login with LinkedIn account
-     */
-    public function loginWithLinkedInAction()
-    {
-        try {
-            $this->view->disable();
-            $this->auth->loginWithLinkedIn();
-        } catch(AuthException $e) {
-            $this->flash->error('There was an error connectiong to LinkedIn.');
-        }
-    }
-
-    /**
-     * Login with Twitter account
-     */
-    public function loginWithTwitterAction()
-    {
-        try {
-            $this->view->disable();
-            $this->auth->loginWithTwitter();
-        } catch(AuthException $e) {
-            $this->flash->error('There was an error connectiong to Twitter.');
-        }
-    }
-
-    /**
-     * Login with Google account
-     */
-    public function loginWithGoogleAction()
-    {
-        try {
-            $this->view->disable();
-            $this->auth->loginWithGoogle();
-        } catch(AuthException $e) {
-            $this->flash->error('There was an error connectiong to Google.');
-        }
+        return $response;
     }
 
     /**
@@ -111,8 +60,10 @@ class UserController extends Controller
      */
     public function signoutAction()
     {
-        $this->auth->remove();
-        return $this->response->redirect('/', true);
+        $response = new Response();
+        $user = UserApp::current();
+        $user->logout();
+        $response->setStatusCode(201, "Logout");
     }
 
     /**

@@ -13,7 +13,8 @@
   "require": {
     "php": "~5.4",
     "ext-phalcon": ">= 2.0.8",
-    "crada/phalcon-user-plugin": "2.0"
+    "crada/phalcon-user-plugin": "2.0",
+    "userapp/widget": "~0.6.7"
   },
   "require-dev": {
     "phpunit/phpunit": "3.7.*",
