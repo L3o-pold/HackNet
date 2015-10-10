@@ -116,6 +116,7 @@ class UserController extends Controller
     }
 
     /**
+     * @todo remove view / handle error return
      * Register user
      */
     public function registerAction()
