@@ -9,4 +9,8 @@ $loader->registerDirs(
     array(
         $config->application->modelsDir
     )
+)->registerNamespaces(
+    array(
+        'HackNet\Controllers' => $config->application->controllersDir,
+    )
 )->register();

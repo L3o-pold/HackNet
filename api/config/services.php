@@ -8,6 +8,7 @@
 use Phalcon\Mvc\View\Simple as View;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Di\FactoryDefault;
+use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 
 $di = new FactoryDefault();
 
@@ -17,6 +18,16 @@ $di = new FactoryDefault();
 $di->setShared('view', function () use ($config) {
     $view = new View();
     $view->setViewsDir($config->application->viewsDir);
+    $view->registerEngines(array(
+        '.phtml' => function ($view, $di) use ($config) {
+            $volt = new VoltEngine($view, $di);
+            $volt->setOptions(array(
+                'compiledPath' => $config->application->cacheDir . 'volt/',
+                'compiledSeparator' => '_'
+            ));
+            return $volt;
+        }
+    ));
     return $view;
 });
 
@@ -41,3 +52,32 @@ $di->setShared('db', function () use ($config) {
 
     return new $class($dbConfig);
 });
+
+//Make config settings available
+$di->set('config', $config, true);
+
+/**
+ * Plugging the PhalconUserPlugin
+ */
+$di['dispatcher'] = function() use ($di) {
+    $eventsManager = $di->getShared('eventsManager');
+    $security = new \Phalcon\UserPlugin\Plugin\Security($di);
+    $eventsManager->attach('dispatch', $security);
+    $dispatcher = new Dispatcher();
+    $dispatcher->setDefaultNamespace('HackNet\Controllers');
+    $dispatcher->setEventsManager($eventsManager);
+    return $dispatcher;
+};
+
+/**
+ * Register Auth, ACL and Mail services used by PhalconUserPlugin
+ */
+$di['auth'] = function(){
+    return new \Phalcon\UserPlugin\Auth\Auth();
+};
+$di['acl'] = function() {
+    return new \Phalcon\UserPlugin\Acl\Acl();
+};
+$di['mail'] = function() {
+    return new \Phalcon\UserPlugin\Mail\Mail();
+};
