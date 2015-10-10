@@ -24,6 +24,32 @@ use \UserApp\Widget\User as UserApp;
 class UserController extends Controller
 {
 
+    public function indexAction() {
+
+        $this->response->setStatusCode(301, "Permission denied");
+        $this->response->setJsonContent(json_encode(['errors' => [['status' => 301, 'detail' => 'Permission denied']]]));
+
+        if(!UserApp::authenticated() && isset($_COOKIE["ua_session_token"])) {
+            $token = $_COOKIE["ua_session_token"];
+
+            try {
+                $valid_token = UserApp::loginWithToken($token);
+            } catch(\UserApp\Exceptions\ServiceException $exception) {
+                $this->flash->error($exception->getMessage());
+                $valid_token = false;
+            }
+
+            if (!$valid_token) {
+
+            } else {
+                $this->response->setStatusCode(200, "Success");
+                $this->response->setJsonContent(json_encode(['errors' => [['status' => 200, 'detail' => 'Success']]]));
+            }
+        }
+
+        return $this->response;
+    }
+
     /**
      * Login user
      * @return \Phalcon\Http\ResponseInterface

@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('hackNet')
-    .controller('MainCtrl', ['$scope',
+    .controller('MainCtrl', [
+        '$scope',
         'commandBroker',
-        '$rootScope', function ($scope, $rootScope) {
-            $rootScope.$on('user.login', function() {
-                $http.defaults.headers.common.Authorization = 'Basic ' + btoa(':' + user.token());
+        '$resource',
+        '$rootScope',
+        function ($scope, $http, $resourceProvider) {
+            var User = $resourceProvider('http://www.hacknet.com/api/user/', {});
+            User.get({}, function(u, getResponseHeaders){
+                console.log(getResponseHeaders);
             });
-
-            $rootScope.$on('user.logout', function() {
-                $http.defaults.headers.common.Authorization = null;
-            });
-    }]);
+        }
+    ]);

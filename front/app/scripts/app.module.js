@@ -2,6 +2,7 @@
     'use strict';
 
     var app = angular.module('hackNet', [
+        'ngResource',
         'ngRoute',
         'UserApp',
         'ui.bootstrap',
@@ -11,8 +12,15 @@
         'ng-terminal-example.command.filesystem'
     ]);
 
-    app.run(function($rootScope, user) {
+    app.run(function($rootScope, user, $http) {
         user.init({ appId: '56191c36bd950' });
-    });
 
+        $rootScope.$on('user.login', function() {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa(':' + user.token());
+        });
+
+        $rootScope.$on('user.logout', function() {
+            $http.defaults.headers.common['Authorization'] = null;
+        });
+    });
 })();
