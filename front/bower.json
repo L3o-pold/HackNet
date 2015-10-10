@@ -22,7 +22,7 @@
     "font-awesome": "~4.4.0",
     "angular-bootstrap": "~0.13.4",
     "modernizr": "*",
-    "oauth-ng": "~0.4.2",
+    "userapp-angular": "~2.0.4",
     "angular-route": "~1.4.7"
   },
   "devDependencies": {
