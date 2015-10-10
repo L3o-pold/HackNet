@@ -10,16 +10,6 @@
         <div class="panel panel-default">
           <div class="panel-heading">Display</div>
           <div class="panel-body">
-              <oauth
-                      template="views/oauth2.html"
-                      site="https://accounts.google.com/o/oauth2"
-                      client-id="71428555143-gajev4bbm9nl5oloe6blhijq2vp4qvac.apps.googleusercontent.com"
-                      redirect-uri="http://www.hacknet.com/index.html"
-                      scope="https://www.googleapis.com/auth/userinfo.email"
-                      profile-uri="https://www.googleapis.com/userinfo/v2/me"
-                      response-type="token"
-                      authorize-path="/auth">
-            </oauth>
           </div>
         </div>
         <div class="panel panel-default">
@@ -32,7 +22,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">Terminal</div>
           <div class="panel-body">
-            <div ng-controller="console" ng-if="show=='logged-in'">
+            <div ng-controller="console">
                 <terminal></terminal>
             </div>
           </div>
