@@ -54,7 +54,7 @@ module.exports = function (grunt) {
       styles: {
         files: ['<%= config.app %>/styles/{,*/}*.css'],
         tasks: [
-          //'newer:copy:styles',
+          'newer:copy:styles',
           'postcss'
         ],
         options: {

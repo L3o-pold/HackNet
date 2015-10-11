@@ -5,7 +5,7 @@
   <title>
     Hacknet
   </title>
-    <base href="/front/dist/">
+    <base href="/">
     <meta name="robots" content="index, follow"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,16 +17,16 @@
     <link rel="stylesheet" type="text/css" href="styles/app.css">
     <!-- endbuild -->
 
-    <!-- build:css(.tmp) styles/font-awesome.css -->
-    <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- endbuild -->
-
     <!-- build:css(.tmp) styles/login.css -->
     <link rel="stylesheet" type="text/css" href="styles/login.css">
     <!-- endbuild -->
 
     <!-- build:css(.tmp) styles/terminal.css -->
     <link rel="stylesheet" type="text/css" href="styles/terminal.css">
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/font-awesome.css -->
+    <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
     <!-- endbuild -->
 
     <!-- bower:css -->
@@ -52,6 +52,8 @@
     <div id="pageLoading">
         <div class="loading"></div>
     </div>
+
+    <div ng-include="'views/header.html'"></div>
 
     <!-- Add your site or application content here -->
     <div ng-view=""></div>

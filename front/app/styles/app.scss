@@ -60,7 +60,9 @@ html, body {
     height: 100%;
     visibility: hidden;
     position: absolute;
-    z-index: 0;
+    top: 0;
+    left: 0;
+    z-index: 2;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
@@ -100,7 +102,6 @@ html, body {
         background: #000;
     }
 }
-
 
 @-moz-keyframes init {
     0%, 10% {
