@@ -1,3 +1,39 @@
+var weekday = new Array(7);
+weekday[0]=  "Sun";
+weekday[1] = "Mon";
+weekday[2] = "Tue";
+weekday[3] = "Wed";
+weekday[4] = "Thu";
+weekday[5] = "Fri";
+weekday[6] = "Sat";
+
+function clock() {
+    var time = new Date();
+    var hr = time.getHours();
+    var min = time.getMinutes();
+    var sec = time.getSeconds();
+    var ampm = " PM ";
+    if (hr < 12){
+        ampm = " AM ";
+    }
+    if (hr > 12){
+        hr -= 12;
+    }
+    if (hr < 10){
+        hr = " " + hr;
+    }
+    if (min < 10){
+        min = "0" + min;
+    }
+    if (sec < 10){
+        sec = "0" + sec;
+    }
+    document.getElementById('clock').innerHTML = weekday[time.getDay()] + " " + hr + ":" + min + ampm;
+    setTimeout("clock()", 1000);
+}
+
+window.onload=clock;
+
 var dialogue	=	document.getElementsByClassName("dialogue")[0];
 
 /** Define a simple wrapper for the dialogue's classList to allow us to lazily/easily toggle its open state. */

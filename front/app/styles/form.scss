@@ -1,0 +1,33 @@
+.form-btn {
+  margin-top: 10px;
+}
+
+.form-box {
+  background-color: lightgrey;
+  padding-bottom: 20px;
+}
+
+.kali-logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background: url(../images/kali-logo.png) center no-repeat;
+  background-size: cover;
+}
+
+.logName {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  margin: 10px 0 0 -90px;
+  width: 184px;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}

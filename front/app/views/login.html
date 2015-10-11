@@ -1,8 +1,6 @@
-<!-- LOGIN -->
 <div id="pageLogin">
     <div class="row vertical-center">
-        <div id="login-box"
-                class="col-md-3 center-block container">
+        <div class="col-md-3 form-box center-block container">
             <div class="kali-logo center-block"></div>
             <div class="logName">
                 <p ng-show="loading"><img
@@ -10,13 +8,11 @@
                 <p ng-show="error">{{ error.message }}</p>
             </div>
             <form ua-login class="form-horizontal">
-                <input name="login" placeholder="Username" type="text"
-                        class="form-control"
-                        id="username" required>
-                <input type="password" id="password" name="password"
-                        class="form-control"
+                <input name="login" placeholder="Email" type="text"
+                        class="form-control" required>
+                <input type="password" name="password" class="form-control"
                         placeholder="Password" required/>
-                <div class="login-btn">
+                <div class="form-btn">
                     <button ua-oauth-link="linkedin" class="btn btn-linkedin">
                         <i class="fa fa-linkedin"></i>
                     </button>

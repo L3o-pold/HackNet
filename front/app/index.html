@@ -17,8 +17,16 @@
     <link rel="stylesheet" type="text/css" href="styles/app.css">
     <!-- endbuild -->
 
-    <!-- build:css(.tmp) styles/login.css -->
-    <link rel="stylesheet" type="text/css" href="styles/login.css">
+    <!-- build:css(.tmp) styles/header.css -->
+    <link rel="stylesheet" type="text/css" href="styles/header.css">
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/os.css -->
+    <link rel="stylesheet" type="text/css" href="styles/os.css">
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/form.css -->
+    <link rel="stylesheet" type="text/css" href="styles/form.css">
     <!-- endbuild -->
 
     <!-- build:css(.tmp) styles/terminal.css -->
@@ -49,14 +57,14 @@
     </div>
 
     <!-- BOOT -->
-    <div id="pageLoading">
+    <div id="screenLoading">
         <div class="loading"></div>
     </div>
 
     <div ng-include="'views/header.html'"></div>
 
     <!-- Add your site or application content here -->
-    <div ng-view=""></div>
+    <div id="os" ng-view=""></div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
