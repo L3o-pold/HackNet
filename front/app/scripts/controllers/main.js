@@ -7,7 +7,7 @@ angular.module('hackNet')
         '$resource',
         '$rootScope',
         function ($scope, $http, $resourceProvider) {
-            var User = $resourceProvider('http://www.hacknet.com/api/user/');
-            var test = User.get();
+            //var User = $resourceProvider('http://www.hacknet.com/api/user/');
+            //var test = User.get();
         }
     ]);

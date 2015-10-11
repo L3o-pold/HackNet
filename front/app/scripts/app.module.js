@@ -16,7 +16,7 @@
         user.init({ appId: '56191c36bd950' });
 
         $rootScope.$on('user.login', function() {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa(':' + user.token());
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('56191c36bd950:' + user.token());
         });
 
         $rootScope.$on('user.logout', function() {

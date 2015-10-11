@@ -13,24 +13,45 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <!-- build:css(.tmp) styles/style.css -->
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <!-- build:css(.tmp) styles/app.css -->
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
     <!-- endbuild -->
 
     <!-- build:css(.tmp) styles/font-awesome.css -->
     <link rel="stylesheet" type="text/css" href="../bower_components/font-awesome/css/font-awesome.min.css">
     <!-- endbuild -->
 
+    <!-- build:css(.tmp) styles/login.css -->
+    <link rel="stylesheet" type="text/css" href="styles/login.css">
+    <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/terminal.css -->
+    <link rel="stylesheet" type="text/css" href="styles/terminal.css">
+    <!-- endbuild -->
+
     <!-- bower:css -->
     <!-- endbower -->
-
 </head>
 <body ng-controller="MainCtrl">
     <!--[if lt IE 10]>
     <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-include="'views/header.html'"></div>
+    <!-- FAIL -->
+    <div id="fail">
+        <div class="fail-browser-logo">
+            <img src="images/kali-logo.png" alt="Kali" />
+        </div>
+        <div class="fail-browser">
+            <p><strong>I'm sorry to inform you that your browser don't support CSS3 Animations!</strong></p>
+            <p>This site uses features that <em>require</em> a modern browser - why not try <a href="https://www.google.com/chrome/browser/desktop/" target="_blank" title="Download Chrome">Google Chrome</a> ?</p>
+        </div>
+    </div>
+
+    <!-- BOOT -->
+    <div id="pageLoading">
+        <div class="loading"></div>
+    </div>
 
     <!-- Add your site or application content here -->
     <div ng-view=""></div>
@@ -46,6 +67,9 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!-- build:js scripts/boot.js -->
+    <script type="text/javascript" src="scripts/boot.js"></script>
+    <!-- endbuild -->
     <!-- build:js scripts/vtortola.ng-terminal.js -->
     <script type="text/javascript" src="scripts/vtortola.ng-terminal.js"></script>
     <!-- endbuild -->

@@ -1,17 +1,51 @@
-<p>Please log in</p>
+<!-- LOGIN -->
+<div id="pageLogin">
+    <header id="header" style="background-color: black;">
+        <nav id="menu"
+                style="width: 100px; margin: auto; position: relative;">
+            <ul>
+                <li class="clock">
+                    Tue 1:00PM
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-<form ua-login>
-	<input name="login" placeholder="Username"><br>
-	<input name="password" placeholder="Password" type="password"><br>
-	<p><button type="submit">Log in</button> or
-	<button ua-oauth-link="linkedin" class="btn btn-lg btn-linkedin"><i class="fa fa-linkedin"></i></button>
-<button ua-oauth-link="google" class="btn btn-lg btn-google"><i class="fa fa-google"></i></button>
-<button ua-oauth-link="github" class="btn btn-lg btn-github"><i class="fa fa-github"></i></button>
-<button ua-oauth-link="facebook" class="btn btn-lg btn-facebook"><i class="fa fa-facebook"></i></button>
-
-	<p ng-show="loading"><img src="https://app.userapp.io/img/ajax-loader-transparent.gif"></p>
-	<p ng-show="error">{{ error.message }}</p>
-</form>
-
-<p><a href="#/signup">Sign up</a></p>
-<p><a href="#/reset-password">Reset password</a></p>
+    <div class="row vertical-center">
+        <div id="login-box"
+                class="col-md-3 center-block container">
+            <div class="kali-logo center-block"></div>
+            <div class="logName">
+                <p ng-show="loading"><img
+                        src="https://app.userapp.io/img/ajax-loader-transparent.gif"></p>
+                <p ng-show="error">{{ error.message }}</p>
+            </div>
+            <form ua-login class="form-horizontal">
+                <input name="login" placeholder="Username" type="text"
+                        class="form-control"
+                        id="username" required>
+                <input type="password" id="password" name="password"
+                        class="form-control"
+                        placeholder="Password" required/>
+                <div class="login-btn">
+                    <button ua-oauth-link="linkedin" class="btn btn-linkedin">
+                        <i class="fa fa-linkedin"></i>
+                    </button>
+                     <button ua-oauth-link="google"
+                             class="btn btn-google"><i
+                             class="fa fa-google"></i></button>
+                <button ua-oauth-link="github"
+                        class="btn btn-github"><i
+                        class="fa fa-github"></i></button>
+                <button ua-oauth-link="facebook"
+                        class="btn btn-facebook"><i
+                        class="fa fa-facebook"></i></button>
+                    <div class="pull-right">
+                        <a href="#/reset-password" class="btn btn-default">Reset password</a>
+                        <a href="#/signup" class="btn btn-default">Sign up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

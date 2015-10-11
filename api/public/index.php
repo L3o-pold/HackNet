@@ -42,3 +42,11 @@ try {
 } catch (\Exception $e) {
     //echo $e->getMessage();
 }
+
+/**
+ *
+ */
+function vdd($data) {
+    var_dump($data);
+    die;
+}
