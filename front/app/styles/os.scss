@@ -36,7 +36,11 @@
 }
 
 #pageOS {
-    margin: 20px 20px 20px 20px;
+    margin: 40px 20px 20px 20px;
+}
+
+#consoleWindow .panel-body {
+    padding: 0;
 }
 
 @-webkit-keyframes init {

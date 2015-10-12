@@ -17,10 +17,12 @@
 
         $rootScope.$on('user.login', function() {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('56191c36bd950:' + user.token());
+            $rootScope.user = user;
         });
 
         $rootScope.$on('user.logout', function() {
             $http.defaults.headers.common['Authorization'] = null;
+            $rootScope.user = null;
         });
     });
 })();

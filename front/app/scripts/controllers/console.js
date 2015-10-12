@@ -10,10 +10,7 @@ angular.module('hackNet')
             setTimeout(function () {
                 $scope.$broadcast('terminal-output', {
                     output: true,
-                    text: ['Welcome to vtortola.GitHub.io',
-                        'This is an example of ng-terminal-emulator.',
-                        '',
-                        "Please type 'help' to open a list of commands"],
+                    text: ["Please type 'help' to open a list of commands"],
                     breakLine: true
                 });
                 $scope.$apply();
