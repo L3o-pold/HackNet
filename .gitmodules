@@ -1,3 +1,4 @@
 [submodule "api"]
 	path = api
 	url = https://github.com/L3o-pold/HackNetAPI.git
+	branch = master
