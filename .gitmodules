@@ -1,3 +1,3 @@
 [submodule "api"]
 	path = api
-	url = /Applications/MAMP/htdocs/PHP/HackNetAPI
+	url = https://github.com/L3o-pold/HackNetAPI.git
