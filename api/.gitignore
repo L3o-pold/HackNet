@@ -1,6 +1,0 @@
-/cache/
-/config/development/
-/migrations/
-/vendor/
-.phalcon
-composer.lock
