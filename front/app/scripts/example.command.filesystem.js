@@ -25,6 +25,10 @@
                 }
             });
 
+            me.getResource = function() {
+                return File;
+            }
+
             me.getItem = function (keyName) {
                 var item = File.get({fileId: keyName}, function () {
                     if (keyName) {
@@ -339,12 +343,17 @@
 
                     var filekey = pathTools.combine(_currentPath, name);
 
-                    var file = storage.getItem(filekey);
+                    var fileResource = storage.getResource();
 
-                    if (!file) {
-                        throw new Error("The file does not exist");
-                    }
-                    return file.fileContent;
+                    var item = fileResource.get({fileId: filekey});
+
+                    var content = item.$promise.then(function () {
+                        return item.data.fileContent;
+                    }, function() {
+                        return null;
+                    });
+
+                    return content;
                 };
 
                 return me;
@@ -500,16 +509,21 @@
                     if (!path)
                         throw new Error("A file name is required");
 
-                    /**
-                     * Async request makes bug here...
-                     */
-                    content = fs.readFile(path);
+                    fs.readFile(path).then(function(content) {
+                        if (content == null) {
+                            session.output.push({
+                                output: true,
+                                text: "The file does not exist".split('\n'),
+                                breakLine: true
+                            });
+                        }
 
-                    var outtext = content ? content.split('\n') : [];
-                    session.output.push({
-                        output: true,
-                        text: outtext,
-                        breakLine: true
+                        var outtext = content ? content.split('\n') : [];
+                        session.output.push({
+                            output: true,
+                            text: outtext,
+                            breakLine: true
+                        });
                     });
                 };
                 return me;
