@@ -27,7 +27,7 @@
 
             me.getResource = function() {
                 return File;
-            }
+            };
 
             me.getItem = function (keyName) {
                 var item = File.get({fileId: keyName}, function () {
@@ -58,8 +58,6 @@
             };
 
             return me;
-
-            //return window.localStorage;
         }])
 
     .service('pathTools', ['fileSystemConfiguration',
@@ -205,10 +203,19 @@
                     else if (path) {
 
                         var dirkey = pathTools.combine(_currentPath, path, "_dir");
-                        if (!storage.getItem(dirkey))
-                            throw new Error("The directory '" + path + "' does not exist.");
+                        var error = false;
 
-                        _currentPath = pathTools.combine(_currentPath, path);
+                        var fileResource = storage.getResource();
+                        var item = fileResource.get({fileId: dirkey});
+
+                        var content = item.$promise.then(function () {
+                            _currentPath = pathTools.combine(_currentPath, path);
+                            return _currentPath;
+                        }, function() {
+                            return null;
+                        });
+
+                        return content;
                     }
 
                     return _currentPath;
@@ -223,13 +230,15 @@
                     if (_currentPath != config.directorySeparator)
                         result.directories.push("..");
 
+                    console.log('List files from ' + _currentPath);
+
                     /**
                      * Hum... should use storage but it's async... need help!
                      */
-                    var File = $resource('http://www.hacknet.com/api/file/:fileId', {fileId: '@id'});
+                    var fileResource = storage.getResource();
+                    var item = fileResource.get({});
 
-                    var files = File.get({}, function () {
-
+                    var content = item.$promise.then(function (files) {
                         for (var i in files.data) {
 
                             var fileName = files.data[i].fileName;
@@ -245,9 +254,11 @@
                         result.files.sort();
 
                         return result;
+                    }, function() {
+                        return null;
                     });
 
-                    return result;
+                    return content;
                 };
 
                 me.existsDir = function (path, failIfNotExist) {
@@ -399,10 +410,35 @@
                 me.handle = function (session, path) {
                     if (!path)
                         throw new Error("A directory name is required");
-                    session.commands.push({
-                        command: 'change-prompt',
-                        prompt: {path: fs.path(path)}
-                    });
+
+                    /**
+                     * @todo remove duplicate code
+                     * Get that from config
+                     */
+                    if (path == "..") {
+                        session.commands.push({
+                            command: 'change-prompt',
+                            prompt: {
+                                path: fs.path(path)
+                            }
+                        });
+                    } else {
+                        fs.path(path).then(
+                            function(content) {
+                                if (content == null) {
+                                    throw new Error("The directory '" + path + "' does not exist.");
+                                }
+
+                                session.commands.push({
+                                    command: 'change-prompt',
+                                    prompt: {
+                                        path: content
+                                    }
+                                });
+                            }
+                        );
+                    }
+
                 };
                 return me;
             };
@@ -468,24 +504,25 @@
                 me.init = ['fileSystem',
                     function (fileSystem) {
                         fs = fileSystem;
-                        l = fs.list();
                     }];
                 me.handle = function (session) {
                     var output = [];
 
-                    for (var i = 0; i < l.directories.length; i++) {
-                        output.push("[DIR]\t\t" + l.directories[i]);
-                    }
-                    for (var i = 0; i < l.files.length; i++) {
-                        output.push("     \t\t" + l.files[i]);
-                    }
-                    output.push("");
-                    output.push("Total: " + (l.directories.length + l.files.length));
+                    fs.list().then(function(files) {
+                        for (var i = 0; i < files.directories.length; i++) {
+                            output.push("[DIR]\t\t" + files.directories[i]);
+                        }
+                        for (var i = 0; i < files.files.length; i++) {
+                            output.push("     \t\t" + files.files[i]);
+                        }
+                        output.push("");
+                        output.push("Total: " + (files.directories.length + files.files.length));
 
-                    session.output.push({
-                        output: true,
-                        text: output,
-                        breakLine: true
+                        session.output.push({
+                            output: true,
+                            text: output,
+                            breakLine: true
+                        });
                     });
                 };
                 return me;
