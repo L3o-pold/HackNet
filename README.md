@@ -1,5 +1,7 @@
 # HackNet
 
+[API](https://github.com/L3o-pold/HackNetAPI) [![Build Status](https://travis-ci.org/L3o-pold/HackNetAPI.svg)](https://travis-ci.org/L3o-pold/HackNetAPI)
+
 ## Preview
 
 ![Init](http://leopoldjacquot.com/hacknet/init.png)
