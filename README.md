@@ -1,6 +1,11 @@
 # HackNet
 
-[API](https://github.com/L3o-pold/HackNetAPI) [![Build Status](https://travis-ci.org/L3o-pold/HackNetAPI.svg)](https://travis-ci.org/L3o-pold/HackNetAPI)
+|         | Travis           | Scrutinizer  | Code Quality |
+| ------------- |:-------------:| -----:| -----:|
+| API      | [![Build Status](https://travis-ci.org/L3o-pold/HackNetAPI.svg)](https://travis-ci.org/L3o-pold/HackNetAPI) 
+| [![Build Status](https://scrutinizer-ci.com/g/L3o-pold/HackNetAPI/badges/build.png?b=master)](https://scrutinizer-ci.com/g/L3o-pold/HackNetAPI/build-status/master) 
+| [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/L3o-pold/HackNetAPI/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/L3o-pold/HackNetAPI/?branch=master) 
+| [![devDependency Status](https://img.shields.io/david/dev/twbs/bootstrap.svg)](https://david-dm.org/twbs/bootstrap#info=devDependencies)
 
 ## Preview
 
