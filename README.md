@@ -23,8 +23,6 @@
 
 #### Frontend
   
-    - Delete a file
-    - Delete a folder
     - Preview discovered target
     - Connect to a target
     - Pwn a target

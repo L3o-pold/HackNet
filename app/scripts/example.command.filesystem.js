@@ -38,7 +38,7 @@
                     }
                 });
 
-                return false;
+                return item;
             };
 
             me.setItem = function (keyName, value) {
@@ -53,8 +53,7 @@
             };
 
             me.removeItem = function (keyName) {
-                var item = me.getItem(keyName);
-                item.remove();
+                return File.delete({fileId: keyName});
             };
 
             return me;
@@ -203,7 +202,6 @@
                     else if (path) {
 
                         var dirkey = pathTools.combine(_currentPath, path, "_dir");
-                        var error = false;
 
                         var fileResource = storage.getResource();
                         var item = fileResource.get({fileId: dirkey});
@@ -233,7 +231,7 @@
                     console.log('List files from ' + _currentPath);
 
                     /**
-                     * Hum... should use storage but it's async... need help!
+                     * That's bad...
                      */
                     var fileResource = storage.getResource();
                     var item = fileResource.get({});
@@ -268,8 +266,6 @@
 
                     var dirkey = pathTools.combine(_currentPath, path, "_dir");
                     var exists = storage.getItem(dirkey);
-                    if (!exists && failIfNotExist)
-                        throw new Error("The directory does not exist.");
                     return exists;
                 };
 
@@ -280,41 +276,60 @@
 
                     if (!pathTools.isDirNameValid(pathTools.getPathItemName(path)))
                         throw new Error("Invalid directory name");
-                    if (me.existsDir(path))
+
+
+                    me.existsDir(path).$promise.then(function() {
                         throw new Error("The directory already exists.");
-                    else {
+                    }, function() {
                         var dirkey = pathTools.combine(_currentPath, path, "_dir");
                         storage.setItem(dirkey, "_dir");
-                    }
+                    });
                 };
 
                 me.removeDir = function (path) {
+
                     console.log("Remove dir: " + path + " on: " + _currentPath);
+
                     if (!pathTools.isDirNameValid(path))
                         throw new Error("The directory name is not valid");
 
-                    if (me.existsDir(path, true)) {
+                    var folder = me.existsDir(path, true);
+
+                    folder.$promise.then(function() {
+
                         var dirkey = pathTools.combine(_currentPath, path, "_dir");
                         path = pathTools.combine(_currentPath, path);
                         console.log("Full path: " + path);
                         var keys = [];
-                        for (var key in storage) {
 
-                            if (key.length >= path.length) {
-                                var s = key.substr(0, path.length);
-                                if (s === path) {
-                                    keys.push(key);
-                                    console.log("Remove: " + key);
-                                    continue;
+                        /**
+                         * That's bad...
+                         */
+                        var fileResource = storage.getResource();
+                        var item = fileResource.get({});
+
+                        item.$promise.then(function (files) {
+
+                            storage.removeItem(dirkey);
+
+                            for (var i in files.data) {
+
+                                var fileName = files.data[i].fileName;
+
+                                if (pathTools.isFileOfPath(path, fileName)) {
+                                    storage.removeItem(fileName);
                                 }
                             }
-                            console.log("Skip: " + key);
-                        }
-                        storage.removeItem(dirkey)
-                        for (var i = 0; i < keys.length; i++) {
-                            storage.removeItem(keys[i]);
-                        }
-                    }
+                        }, function() {
+                            throw new Error("Error during delete the folder");
+                        });
+
+                        return true;
+                    }, function() {
+                        return false;
+                    });
+
+                    return folder;
                 };
 
                 me.writeFile = function (name, content) {
@@ -339,13 +354,22 @@
                 };
 
                 me.deleteFile = function (name) {
+                    console.log("Remove file: " + name + " on: " + _currentPath);
                     if (!pathTools.isFileNameValid(name))
                         throw new Error("Invalid file name");
                     var filekey = pathTools.combine(_currentPath, name);
-                    if (!storage.getItem(filekey)) {
-                        throw new Error("The file does not exist");
-                    }
-                    storage.removeItem(filekey);
+
+                    var fileResource = storage.getResource();
+                    var item = fileResource.get({fileId: filekey});
+
+                    var promise = item.$promise.then(function () {
+                        storage.removeItem(filekey);
+                        return true;
+                    }, function() {
+                        return false;
+                    });
+
+                    return promise;
                 };
 
                 me.readFile = function (name) {
@@ -358,13 +382,13 @@
 
                     var item = fileResource.get({fileId: filekey});
 
-                    var content = item.$promise.then(function () {
+                    var promise = item.$promise.then(function () {
                         return item.data.fileContent;
                     }, function() {
                         return null;
                     });
 
-                    return content;
+                    return promise;
                 };
 
                 return me;
@@ -483,12 +507,20 @@
                 me.handle = function (session, path) {
                     if (!path)
                         throw new Error("A directory name is required");
-                    fs.removeDir(path);
-                    session.output.push({
-                        output: true,
-                        text: ["Directory removed."],
-                        breakLine: true
-                    });
+
+                    fs.removeDir(path).$promise.then(
+                        function(content) {
+                            if (content == null) {
+                                throw new Error("The directory '" + path + "' does not exist.");
+                            }
+
+                            session.output.push({
+                                output: true,
+                                text: ["Directory removed."],
+                                breakLine: true
+                            });
+                        }
+                    );
                 };
                 return me;
             };
@@ -581,11 +613,15 @@
                 me.handle = function (session, path) {
                     if (!path)
                         throw new Error("A file name is required");
-                    fs.deleteFile(path)
-                    session.output.push({
-                        output: true,
-                        text: ["File deleted."],
-                        breakLine: true
+
+                    fs.deleteFile(path).then(function(content) {
+                        var message = content ? "File deleted." : "The file does not exist".split('\n');
+
+                        session.output.push({
+                            output: true,
+                            text: [message],
+                            breakLine: true
+                        });
                     });
                 };
                 return me;
