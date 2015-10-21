@@ -5,29 +5,29 @@
         .config(['$routeProvider',
             '$locationProvider',
             function ($routeProvider, $locationProvider) {
-                $routeProvider.when('/login', {
-                    templateUrl: 'views/login.html',
-                    login: true
-                });
-                $routeProvider.when('/signup', {
-                    templateUrl: 'views/signup.html',
-                    public: true
-                });
                 $routeProvider.when('/home', {
                     templateUrl: 'views/home.html',
                     controller: 'MainCtrl',
                     public: false
                 });
+                $routeProvider.when('/login', {
+                    templateUrl: 'views/user/login.html',
+                    login: true
+                });
+                $routeProvider.when('/signup', {
+                    templateUrl: 'views/user/signup.html',
+                    public: true
+                });
                 $routeProvider.when('/verify-email', {
-                    templateUrl: 'views/verify-email.html',
+                    templateUrl: 'views/user/verify-email.html',
                     verify_email: true
                 });
                 $routeProvider.when('/reset-password', {
-                    templateUrl: 'views/reset-password.html',
+                    templateUrl: 'views/user/reset-password.html',
                     public: true
                 });
                 $routeProvider.when('/set-password', {
-                    templateUrl: 'views/set-password.html',
+                    templateUrl: 'views/user/set-password.html',
                     set_password: true
                 });
                 $routeProvider.otherwise({redirectTo: '/home'});

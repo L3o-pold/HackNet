@@ -1,4 +1,4 @@
-﻿angular.module('ng-terminal-example.command.filesystem', ['ng-terminal-example.command.tools'])
+﻿angular.module('hackNet.command.filesystem', ['hackNet.command.tools'])
 
     .provider('fileSystemConfiguration', function () {
         var provider = function () {

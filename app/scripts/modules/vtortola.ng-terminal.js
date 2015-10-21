@@ -33,6 +33,7 @@
         me.$get = ['$q', function ($q) {
 
             var loadNotificationSound = function ($q, path) {
+                return;
                 var deferred = $q.defer();
                 var request = new XMLHttpRequest();
                 request.open('GET', path, true);
@@ -51,7 +52,7 @@
                     });
                 }
                 request.send();
-                return deferred.promise;;
+                return deferred.promise;
             };
 
             for (var key in configurations) {

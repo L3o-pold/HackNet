@@ -5,26 +5,28 @@
             <div class="logName">
                 <p ng-show="loading"><img
                         src="https://app.userapp.io/img/ajax-loader-transparent.gif"></p>
+
                 <p ng-show="error">{{ error.message }}</p>
             </div>
             <form ua-login class="form-horizontal">
                 <input name="login" placeholder="Email" type="text"
-                        class="form-control" required>
+                       class="form-control" required>
                 <input type="password" name="password" class="form-control"
-                        placeholder="Password" required/>
+                       placeholder="Password" required/>
+
                 <div class="form-btn">
                     <button ua-oauth-link="linkedin" class="btn btn-linkedin">
                         <i class="fa fa-linkedin"></i>
                     </button>
-                     <button ua-oauth-link="google"
-                             class="btn btn-google"><i
-                             class="fa fa-google"></i></button>
-                <button ua-oauth-link="github"
-                        class="btn btn-github"><i
-                        class="fa fa-github"></i></button>
-                <button ua-oauth-link="facebook"
-                        class="btn btn-facebook"><i
-                        class="fa fa-facebook"></i></button>
+                    <button ua-oauth-link="google"
+                            class="btn btn-google"><i
+                            class="fa fa-google"></i></button>
+                    <button ua-oauth-link="github"
+                            class="btn btn-github"><i
+                            class="fa fa-github"></i></button>
+                    <button ua-oauth-link="facebook"
+                            class="btn btn-facebook"><i
+                            class="fa fa-facebook"></i></button>
                     <div class="pull-right">
                         <a href="#/reset-password" class="btn btn-default">Reset password</a>
                         <a href="#/signup" class="btn btn-default">Sign up</a>

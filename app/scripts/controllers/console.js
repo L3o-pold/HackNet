@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hackNet')
-    .controller('console', ['$scope',
+    .controller('consoleCtrl', ['$scope',
         'commandBroker',
         '$rootScope',
         function ($scope, commandBroker, $rootScope) {

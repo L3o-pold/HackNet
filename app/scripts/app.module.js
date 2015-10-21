@@ -7,9 +7,9 @@
         'UserApp',
         'ui.bootstrap',
         'vtortola.ng-terminal',
-        'ng-terminal-example.command.tools',
-        'ng-terminal-example.command.implementations',
-        'ng-terminal-example.command.filesystem'
+        'hackNet.command.tools',
+        'hackNet.command.implementations',
+        'hackNet.command.filesystem'
     ]);
 
     app.run(function($rootScope, user, $http) {
