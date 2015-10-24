@@ -7,6 +7,8 @@
         'UserApp',
         'ui.bootstrap',
         'vtortola.ng-terminal',
+        'NetMapCtrl',
+        'netMapServices',
         'hackNet.command.tools',
         'hackNet.command.implementations',
         'hackNet.command.filesystem'
@@ -17,6 +19,7 @@
 
         $rootScope.$on('user.login', function() {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa('56191c36bd950:' + user.token());
+            user.current.ip = '127.0.0.1';
             $rootScope.user = user;
         });
 

@@ -21,11 +21,11 @@
                             </h2>
 
                             <h2>
-                                {{ user.email }} PC <br>
+                                {{user.current.email}} PC <br>
                             </h2>
 
                             <h3>
-                                @ 195.248.20.86
+                                @ {{user.current.ip}}
                             </h3>
                         </div>
                     </div>
@@ -57,9 +57,17 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-default" ng-controller="NetMapListCtrl">
                 <div class="panel-heading">netMap 1.7</div>
-                <div class="panel-body"></div>
+                <div class="panel-body">
+                    <ul>
+                        <li ng-repeat="computer in computers.data">
+                            <p>
+                                {{computer.userIp}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="consoleWindow" class="col-md-4">
