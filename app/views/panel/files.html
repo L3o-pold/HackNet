@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Display</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-10">
+                <h2>
+                    {{user.current.ip}} PC File System
+                </h2>
+            </div>
+            <div class="col-sm-2">
+                <a href="#/home" class="pull-right system-button"><-</a>
+            </div>
+        </div>
+        <div class="row system-button">
+            <ul>
+                <li ng-repeat="directory in files.directories" class="disable">
+                    {{directory}}
+                </li>
+                <li ng-repeat="file in files.files" class="disable">
+                    {{file}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

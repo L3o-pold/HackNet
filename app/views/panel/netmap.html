@@ -1,0 +1,11 @@
+<div class="panel panel-default" ng-controller="NetMapListCtrl">
+    <div class="panel-heading">netMap 1.7</div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="computer in computers.data">
+                <button tooltip-placement="right" class="pulse-button" tooltip="{{computer.userIp}}" ng-class="{selected: computer.userIp==user.current.ip}">
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

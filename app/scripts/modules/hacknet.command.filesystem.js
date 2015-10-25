@@ -183,8 +183,8 @@
     .service('fileSystem', ['fileSystemConfiguration',
         'pathTools',
         'storage',
-        '$resource',
-        function (config, pathTools, storage, $resource) {
+        '$rootScope',
+        function (config, pathTools, storage, $rootScope) {
             var fs = function () {
                 var me = {};
                 var _currentPath = config.directorySeparator;
@@ -251,8 +251,12 @@
                         result.directories.sort();
                         result.files.sort();
 
+                        $rootScope.files = result;
+
                         return result;
                     }, function() {
+                        $rootScope.files = [];
+
                         return null;
                     });
 

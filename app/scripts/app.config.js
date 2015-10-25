@@ -10,6 +10,11 @@
                     controller: 'MainCtrl',
                     public: false
                 });
+                $routeProvider.when('/files', {
+                    templateUrl: 'views/filesSystem.html',
+                    controller: 'MainCtrl',
+                    public: false
+                });
                 $routeProvider.when('/login', {
                     templateUrl: 'views/user/login.html',
                     login: true
